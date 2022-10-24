@@ -1,0 +1,15 @@
+server:
+  port: 8888
+  compression:
+    min-response-size: 1024
+    enabled: true
+
+
+spring:
+  # 数据源配置
+  datasource:
+    type: com.mysql.cj.jdbc.MysqlDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/user?useSSL=false&serverTimezone=CTT&characterEncoding=UTF8
+    username: root
