@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.demo.model.entity.UserDO">
+    <result column="id" property="id" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+        <result column="username" property="username" />
+        <result column="nickname" property="nickname" />
+        <result column="avatar" property="avatar" />
+        <result column="email" property="email" />
+        <result column="is_delete" property="isDelete" />
+    </resultMap>
+    <select id="getList" resultType="com.example.demo.model.entity.UserDO">
+        select * from user
+        where 1=1
+        <if test="dto.userName!='' and dto.userName!=null">
+           and userName = #{dto.username}
+        </if>
+    </select>
+
+</mapper>
