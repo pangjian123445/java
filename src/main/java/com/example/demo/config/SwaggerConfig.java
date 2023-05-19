@@ -84,7 +84,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("FH Admin Swagger3 RESTful API")    // 页面标题
+                .title("SwaggerTest")    // 页面标题
                 .version("3.0.0")                       // 版本号
                 .description("fhadmin.org")                 // 描述
                 .build();

@@ -30,6 +30,9 @@ public class UserDO extends BaseModel {
      */
     private String nickname;
 
+    //密码
+    private String password;
+
     /**
      * 头像url
      */
@@ -39,6 +42,8 @@ public class UserDO extends BaseModel {
      * 邮箱
      */
     private String email;
+
+    private String phone;
 
     private Boolean isDelete;
 

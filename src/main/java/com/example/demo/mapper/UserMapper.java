@@ -17,4 +17,20 @@ import java.util.List;
 public interface UserMapper extends BaseMapper<UserDO> {
 
     List<UserDO> getList(@Param("dto") UserDO user,@Param("keyword") String keyword);
+
+    /**
+     * 查询用户名为$username的人数
+     *
+     * @param username 用户名
+     * @return 人数
+     */
+    int selectCountByUsername(String username);
+
+    /**
+     * 查询用户id为$id的人数
+     *
+     * @param id 用户id
+     * @return 人数
+     */
+    int selectCountById(Long id);
 }

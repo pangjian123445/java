@@ -15,10 +15,24 @@
     </resultMap>
     <select id="getList" resultType="com.example.demo.model.entity.UserDO">
         select * from user
-        where 1=1
+        where is_delete = false
         <if test="dto.userName!='' and dto.userName!=null">
            and userName = #{dto.username}
         </if>
+    </select>
+
+    <select id="selectCountByUsername" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM user as u
+        WHERE u.username = #{username}
+          AND u.is_delete = false
+    </select>
+
+    <select id="selectCountById" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM user as u
+        WHERE u.id = #{id}
+          AND u.is_delete = false
     </select>
 
 </mapper>
