@@ -32,23 +32,23 @@ mybatis-plus:
   mapper-locations: classpath*:/mapper/*.xml
 
 
-#APPID
-wechat:
-appid=wxdf4a5ec5661b9589
-#secret
-appsecret=64a5df9547f60ccb2e2cc8c972d3b280
-token=weixin
-#回调地址（内网穿透地址）
-server=http://elwin.*************.com
-#获取二维码
-qrCodeUrl: https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=TOKEN
-#基础接口的token
-tokenUrl: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET
-#获取openId
-openIdUrl: https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=APPSECRET&code=CODE&grant_type=authorization_code
-#获取用户
-userInfoUrl: https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
-#通过ticket获取二维码
-showqrcode: https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=TICKET
+##APPID
+#wechat:
+#appid=wxdf4a5ec5661b9589
+##secret
+#appsecret=64a5df9547f60ccb2e2cc8c972d3b280
+#token=weixin
+##回调地址（内网穿透地址）
+#server=http://elwin.*************.com
+##获取二维码
+#qrCodeUrl: https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=TOKEN
+##基础接口的token
+#tokenUrl: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET
+##获取openId
+#openIdUrl: https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=APPSECRET&code=CODE&grant_type=authorization_code
+##获取用户
+#userInfoUrl: https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
+##通过ticket获取二维码
+#showqrcode: https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=TICKET
 
 

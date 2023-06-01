@@ -6,7 +6,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.demo.model.vo.LoginVo;
 import com.example.demo.model.vo.PageVo;
 import com.github.pagehelper.PageInfo;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Set;
 
 /**
@@ -77,4 +80,8 @@ public interface UserService extends IService<UserDO> {
      * @return true代表存在
      */
     boolean checkUserExistById(Long id);
+
+    void importBindUser(MultipartFile file) throws IOException;
+
+    void exportUser(HttpServletResponse response, UserDO dto, String keyword);
 }

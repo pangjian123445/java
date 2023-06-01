@@ -19,7 +19,14 @@ class DemoApplicationTests {
 
 //        canFinish(5, new int[][]{{1,0},{0,1}});
 //        sortColors(new int[]{2,0,2,1,1,0});
-        candy(new int[]{1,2,87,87,87,2,1});
+//        candy(new int[]{1,2,87,87,87,2,1});
+        System.out.println(findKthLargest(new int[]{3,2,1,5,6,4}, 2));
+    }
+
+    //中215
+    public int findKthLargest(int[] nums, int k) {
+        List<Integer> list = Arrays.stream(nums).boxed().sorted().collect(Collectors.toList());
+        return list.get(list.size()-k);
     }
 
     //困135

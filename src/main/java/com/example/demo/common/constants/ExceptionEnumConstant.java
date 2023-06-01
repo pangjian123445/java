@@ -52,9 +52,11 @@ public enum ExceptionEnumConstant implements ServiceExceptionEnum {
     USER_PASSWORD_INVALID(10304, "请输入正确的密码"),
     USER_CHANGE_PASSWORD_FAIL(10305, "密码修改失败"),
     USER_GROUP_ADD_FAIL(10307, "无法将用户添加到不存在的组"),
-    USER_PHONE_NOT_EMPTY(10308, "手机号码不能为空"),
+    USER_PHONE_NOT_EMPTY(10308, "请输入正确手机号"),
     USER_PASSWORD_ILLEGAL(10309, "密码过于简单"),
     USER_FORBID_LOGIN(10310,"密码过于简单，已禁止登录，请联系管理员修改密码"),
+    User_Password_IS_NULL(10311,"账号密码不能为空"),
+    USER_Email_NOT_EMPTY(10311,"请输入正确邮箱"),
 
     /**
      * 文件

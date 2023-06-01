@@ -2,15 +2,14 @@ package com.example.demo.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.demo.auth.entity.Token;
-import com.example.demo.common.constants.ExceptionEnumConstant;
+import com.example.demo.auth.annotations.Logger;
 import com.example.demo.common.response.Response;
 import com.example.demo.common.response.ResponseGenerator;
+import com.example.demo.common.utils.ExcelUtil;
 import com.example.demo.common.utils.SendSMS;
 import com.example.demo.config.LoginCaptchaProperties;
-import com.example.demo.exception.ServiceException;
+import com.example.demo.model.dto.user.UserDto;
 import com.example.demo.model.entity.UserDO;
-import com.example.demo.model.vo.LoginVo;
 import com.example.demo.model.vo.PageVo;
 import com.example.demo.model.vo.PhoneLogin;
 import com.example.demo.service.UserService;
@@ -18,10 +17,8 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -127,6 +124,27 @@ public class UserController {
             response.reset();
         }
         return ResponseGenerator.genSuccessResult();
+    }
+
+    @PostMapping("/importBindUser")
+    @ApiOperation(value = "导入")
+    @Logger
+    public Response<?> importBindUser(@RequestPart("file") MultipartFile file) throws IOException {
+        userService.importBindUser(file);
+        return ResponseGenerator.genSuccessResult();
+    }
+
+
+    @GetMapping("/downLoad")
+    @ApiOperation(value = "下载模板")
+    public void downLoad(HttpServletResponse response) throws Exception {
+        ExcelUtil.writeExcel(response,null,"下载模板","sheet", UserDto.class);
+    }
+
+    @PostMapping("/export")
+    @ApiOperation(value = "导出")
+    public void exportUser(HttpServletResponse response, @RequestBody UserDO dto, String keyword) {
+        userService.exportUser(response, dto, keyword);
     }
 
 //    @PostMapping("/login")

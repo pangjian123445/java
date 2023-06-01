@@ -1,6 +1,9 @@
 package com.example.demo.service.impl;
 
 import ch.qos.logback.core.joran.util.beans.BeanUtil;
+import com.alibaba.excel.EasyExcelFactory;
+import com.alibaba.excel.ExcelReader;
+import com.alibaba.excel.read.metadata.ReadSheet;
 import com.alibaba.excel.util.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -8,10 +11,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.common.constants.ExceptionEnumConstant;
 import com.example.demo.common.utils.CaptchaUtil;
 import com.example.demo.common.utils.EncryptUtil;
+import com.example.demo.common.utils.ExcelUtil;
 import com.example.demo.config.LoginCaptchaProperties;
 import com.example.demo.exception.ServiceException;
+import com.example.demo.listener.user.UserListener;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.dto.capcha.LoginCaptchaDto;
+import com.example.demo.model.dto.user.UserDto;
 import com.example.demo.model.entity.BaseModel;
 import com.example.demo.model.entity.UserDO;
 import com.example.demo.model.vo.PageVo;
@@ -22,7 +28,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -177,6 +186,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
     public boolean checkUserExistById(Long id) {
         int rows = this.baseMapper.selectCountById(id);
         return rows > 0;
+    }
+
+    @Override
+    public void importBindUser(MultipartFile file) throws IOException {
+        ExcelReader excelReader = null;
+        excelReader = EasyExcelFactory.read(file.getInputStream(), UserDto.class, new UserListener(this)).build();
+        ReadSheet readSheet = EasyExcelFactory.readSheet(0).build();
+        excelReader.read(readSheet);
+        if (excelReader != null) {
+            excelReader.finish();
+        }
+    }
+
+    @Override
+    public void exportUser(HttpServletResponse response, UserDO dto, String keyword) {
+        List<UserDto> userList = this.baseMapper.getExportList(dto, keyword);
+        try {
+            ExcelUtil.writeExcel(response, userList, "数据", "sheet1", UserDto.class);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            throw new ServiceException(ExceptionEnumConstant.FILE_DOWNLOAD_ERROR);
+        }
     }
 //
 //    @Override

@@ -34,5 +34,12 @@
         WHERE u.id = #{id}
           AND u.is_delete = false
     </select>
+    <select id="getExportList" resultType="com.example.demo.model.dto.user.UserDto">
+        select * from user
+        where is_delete = false
+        <if test="dto.userName!='' and dto.userName!=null">
+            and userName = #{dto.username}
+        </if>
+    </select>
 
 </mapper>

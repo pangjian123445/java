@@ -1,5 +1,6 @@
 package com.example.demo.mapper;
 
+import com.example.demo.model.dto.user.UserDto;
 import com.example.demo.model.entity.UserDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
@@ -33,4 +34,6 @@ public interface UserMapper extends BaseMapper<UserDO> {
      * @return 人数
      */
     int selectCountById(Long id);
+
+    List<UserDto> getExportList(@Param("dto") UserDO user,@Param("keyword") String keyword);
 }
